@@ -1,0 +1,20 @@
+[
+  {
+    "id": "moby-dick",
+    "title": "Moby Dick",
+    "author": "Herman Melville",
+    "cover": "/assets/moby-dick.jpg",
+    "chapters": [
+      {
+        "id": "chapter-1",
+        "title": "Loomings",
+        "content": "Call me Ishmael. Some years ago..."
+      },
+      {
+        "id": "chapter-2",
+        "title": "The Carpet-Bag",
+        "content": "I stuffed a shirt or two into my old carpet-bag..."
+      }
+    ]
+  }
+]
