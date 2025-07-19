@@ -3,19 +3,20 @@ import { loadBooks } from "@/lib/loadBooks";
 import Link from "next/link";
 
 export async function generateStaticParams() {
-  const books = loadBooks();
+  const books = await loadBooks();
   return books.map((book: any) => ({ bookId: book.id }));
 }
 
-export default function BookPage({ params }: { params: { bookId: string } }) {
-  const books = loadBooks();
-  const book = books.find((b: any) => b.id === params.bookId);
+export default async function BookPage({ params }: { params: Promise<{ bookId: string }> }) {
+  const books = await loadBooks();
+  const { bookId } = await params; 
+  const book = books.find((b: any) => b.id === bookId);
   if (!book) return <div>Book not found</div>;
 
   return (
     <main className="p-4">
       <h1 className="text-2xl font-bold mb-4">{book.title}</h1>
-      <p className="mb-4">by {book.author}</p>
+      <p className="mb-4">{book.author}</p>
       <ul>
         {book.chapters.map((ch: any) => (
           <li key={ch.id}>
@@ -23,6 +24,11 @@ export default function BookPage({ params }: { params: { bookId: string } }) {
           </li>
         ))}
       </ul>
+      <nav className="flex justify-between mt-8">
+        <Link href={`/`} className="text-blue-600 hover:underline">
+          Back to Home Page
+        </Link>
+      </nav>
     </main>
   );
 }

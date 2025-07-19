@@ -4,8 +4,7 @@ import { loadBooks } from "@/lib/loadBooks";
 
 
 export default async function HomePage() {
-  const books = loadBooks();
-  console.log("books:", books);
+  const books = await loadBooks();
   return (
     <main className="p-4">
       <h1 className="text-2xl font-bold mb-4">Available Books</h1>
@@ -13,7 +12,7 @@ export default async function HomePage() {
         {books.map((book: any) => (
           <li key={book.id}>
             <Link href={`/books/${book.id}`}>
-              {book.title} by {book.author}
+              {book.title} {book.author}
             </Link>
           </li>
         ))}
